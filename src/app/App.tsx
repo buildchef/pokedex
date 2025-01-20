@@ -1,36 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View} from 'react-native';
-import {consultarPokemon} from "../api/consultarPokemon";
+import { StyleSheet, View } from 'react-native';
+import { consultarPokemon } from "../api/consultarPokemon";
+import PreviaPokemon from "../components/PreviaPokemon";
+import { useEffect, useState } from "react";
+import { Pokemon } from "../utils/types/RetornoDetalhadoPokemon";
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Pressable
-          style={{
-            backgroundColor: "blue"
-          }}
-          onPress={consultarPokemon}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontSize: 25
-          }}
-        >
-          Clique aqui para pesquisar um pokemon
-        </Text>
-      </Pressable>
-      <StatusBar style="auto" />
-    </View>
-  );
+    const [pokemon, setPokemon] = useState<Pokemon>();
+
+    const [fontsLoaded] = useFonts({
+        'nomePokemonFont': require('../../assets/fonts/nomePokemon.ttf'),
+    });
+
+    useEffect(() => {
+        async function prepare() {
+            await SplashScreen.preventAutoHideAsync();
+            consultarPokemon().then((pokemon) => setPokemon(pokemon));
+        }
+        prepare();
+    }, []);
+
+    if (!fontsLoaded) {
+        return null;
+    } else {
+        SplashScreen.hideAsync();
+    }
+
+    return (
+        <View style={styles.container}>
+            <PreviaPokemon pokemon={pokemon} />
+            <StatusBar style="auto" />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
