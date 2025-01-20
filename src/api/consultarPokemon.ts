@@ -1,18 +1,16 @@
 import axios from "axios";
-import {Pokemon} from "../utils/types/RetornoDetalhadoPokemon";
+import { Pokemon } from "../utils/types/RetornoDetalhadoPokemon";
 
-export type RetornoSimplesPokemon = {
-    name: string;
-    url: string;
-};
-
-export const consultarPokemon = async (): Promise<Pokemon> => {
-    try{
-        const resultado = await axios.get("https://pokeapi.co/api/v2/pokemon/1/");
-        console.log(resultado.data)
-        return resultado.data;
+export const consultarPokemons = async (ids: number[]): Promise<Pokemon[]> => {
+    try {
+        const resultados = await Promise.all(
+            ids.map(id =>
+                axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`).then(res => res.data)
+            )
+        );
+        return resultados;
     } catch (error) {
-        console.log("Erro na consulta de pókemon ====>", error);
+        console.log("Erro na consulta de Pokémons ====>", error);
         throw error;
     }
 };

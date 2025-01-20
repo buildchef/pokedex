@@ -1,36 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { consultarPokemon } from "../api/consultarPokemon";
-import PreviaPokemon from "../components/PreviaPokemon";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, FlatList } from "react-native";
 import { useEffect, useState } from "react";
+import PreviaPokemon from "../components/PreviaPokemon";
 import { Pokemon } from "../utils/types/RetornoDetalhadoPokemon";
-import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font';
+import { consultarPokemons } from "../api/consultarPokemon";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 export default function App() {
-    const [pokemon, setPokemon] = useState<Pokemon>();
-
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
     const [fontsLoaded] = useFonts({
-        'nomePokemonFont': require('../../assets/fonts/nomePokemon.ttf'),
+        nomePokemonFont: require("../../assets/fonts/nomePokemon.ttf"),
+        tiposPokemonFont: require("../../assets/fonts/tiposPokemon.ttf"),
     });
 
     useEffect(() => {
         async function prepare() {
             await SplashScreen.preventAutoHideAsync();
-            consultarPokemon().then((pokemon) => setPokemon(pokemon));
+
+            const ids = Array.from({ length: 151 }, (_, i) => i + 1); // Gera IDs de 1 a 151
+            const pokemonData = await consultarPokemons(ids); // Consulta os 151 Pokémons
+            setPokemons(pokemonData);
+
+            SplashScreen.hideAsync();
         }
         prepare();
     }, []);
 
     if (!fontsLoaded) {
         return null;
-    } else {
-        SplashScreen.hideAsync();
     }
 
     return (
         <View style={styles.container}>
-            <PreviaPokemon pokemon={pokemon} />
+            <FlatList
+                data={pokemons}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <PreviaPokemon pokemon={item} />}
+                contentContainerStyle={{ padding: 50 }}
+            />
             <StatusBar style="auto" />
         </View>
     );
@@ -39,8 +47,8 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "flex-start"
     },
 });
