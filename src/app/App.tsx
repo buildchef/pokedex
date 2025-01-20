@@ -1,10 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View} from 'react-native';
+import {consultarPokemon} from "../api/consultarPokemon";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start wo        rking on your app!</Text>
+      <Text>Open up App.tsx to start working on your app!</Text>
+      <Pressable
+          style={{
+            backgroundColor: "blue"
+          }}
+          onPress={consultarPokemon}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: 25
+          }}
+        >
+          Clique aqui para pesquisar um pokemon
+        </Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
