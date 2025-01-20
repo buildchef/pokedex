@@ -6,9 +6,11 @@ import { Pokemon } from "../utils/types/RetornoDetalhadoPokemon";
 import { consultarPokemons } from "../api/consultarPokemon";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import MenuOpcoes from "../components/MenuOpcoes";
 
 export default function App() {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [exibirModalOpcoes, setExibirModalOpcoes] = useState<boolean>(false);
     const [fontsLoaded] = useFonts({
         nomePokemonFont: require("../../assets/fonts/nomePokemon.ttf"),
         tiposPokemonFont: require("../../assets/fonts/tiposPokemon.ttf"),
@@ -52,7 +54,9 @@ export default function App() {
                     }}
                 >POKEDEX</Text>
 
-                <Pressable>
+                <Pressable
+                    onPress={() => setExibirModalOpcoes(true)}
+                >
                     <Image
                         source={{
                             uri: "https://png.pngtree.com/png-vector/20220623/ourmid/pngtree-pokemon-game-symbol-pikachu-play-png-image_5289221.png"
@@ -66,6 +70,12 @@ export default function App() {
                 </Pressable>
 
             </View>
+
+            <MenuOpcoes
+                exibirModalOpcoes={exibirModalOpcoes}
+                setExibirModalOpcoes={setExibirModalOpcoes}
+            />
+
             <FlatList
                 data={pokemons}
                 keyExtractor={(item) => item.id.toString()}
