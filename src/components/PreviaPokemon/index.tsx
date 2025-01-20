@@ -1,8 +1,7 @@
 import {Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
 import {Image, Text, View} from "react-native";
 import {formatarNomePokemon} from "../../utils/formatadores";
-import {useEffect, useState} from "react";
-import {objCoresDeCardPokemon, retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
+import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 
 type PreviaPokemonProps = {
     pokemon?: Pokemon;
@@ -22,7 +21,7 @@ export default function PreviaPokemon({
                 padding: 15,
                 width: 250,
                 height: 120,
-                marginTop: 30
+                marginBottom: 30
             }}
         >
             <View>
