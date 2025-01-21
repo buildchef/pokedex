@@ -1,5 +1,5 @@
 import {Image, Modal, Pressable, Text, View} from "react-native";
-import {Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
+import {Ability, Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
 import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 import {formatarNomePokemon} from "../../utils/formatadores";
 import {MaterialIcons} from "@expo/vector-icons";
@@ -145,8 +145,152 @@ export default function DetalhesPokemon({
                                 />
                             </View>
                     </View>
-                    <View>
-                        <Text>Detalhes do pokemon</Text>
+                    <View
+                        style={{
+                            marginTop: 90,
+                            paddingHorizontal: 20,
+                            marginBottom: 20
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontFamily: "nomePokemonFont",
+                                fontSize: 18,
+                                textAlign: "center"
+                            }}
+                        >POKEMON DETAILS</Text>
+
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                gap: 30
+                            }}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    gap: 12,
+                                    marginTop: 5
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >HEIGHT</Text>
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >WEIGHT</Text>
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >ABILITIES</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >HP</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >ATTACK</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >DEFENSE</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >SPEED</Text>
+                            </View>
+
+                            <View
+                                style={{
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    gap: 12,
+                                    marginTop: 5
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{(Number(pokemon?.height)/10) + " METERS"}</Text>
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{(Number(pokemon?.weight)/10) + " KILOGRAMS"}</Text>
+
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        justifyContent: "flex-start",
+                                        gap: 8
+                                    }}
+                                >
+                                    {pokemon?.abilities.map((ability: Ability, index: number) => (
+                                        <Text
+                                            key={ability.ability.name || index}
+                                            style={{
+                                                fontFamily: "tiposPokemon",
+                                                fontSize: 15
+                                            }}
+                                        >{ability.ability.name.toUpperCase()+","}</Text>
+                                    ))}
+                                </View>
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{pokemon?.stats[0].base_stat}</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{pokemon?.stats[1].base_stat}</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{pokemon?.stats[2].base_stat}</Text>
+
+                                <Text
+                                    style={{
+                                        fontFamily: "tiposPokemon",
+                                        fontSize: 15
+                                    }}
+                                >{pokemon?.stats[5].base_stat}</Text>
+                            </View>
+
+                        </View>
                     </View>
                 </View>
             </View>
