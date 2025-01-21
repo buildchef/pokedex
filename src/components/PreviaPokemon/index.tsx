@@ -1,18 +1,20 @@
 import {Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
-import {Image, Text, View} from "react-native";
+import {Image, Pressable, Text, View} from "react-native";
 import {formatarNomePokemon} from "../../utils/formatadores";
 import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 
 type PreviaPokemonProps = {
+    setExibirDetalhesPokemon: (valor: boolean) => void;
+    setPokemonParaDetalhar: (pokemon: Pokemon) => void;
     pokemon?: Pokemon;
 };
 
 export default function PreviaPokemon({
-    pokemon
+    setExibirDetalhesPokemon, setPokemonParaDetalhar, pokemon
 }: PreviaPokemonProps) {
 
     return (
-        <View
+        <Pressable
             style={{
                 backgroundColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corCard,
                 borderRadius: 20,
@@ -22,6 +24,10 @@ export default function PreviaPokemon({
                 width: 250,
                 height: 120,
                 marginBottom: 30
+            }}
+            onPress={() => {
+                setPokemonParaDetalhar(pokemon);
+                setExibirDetalhesPokemon(true);
             }}
         >
             <View>
@@ -77,6 +83,6 @@ export default function PreviaPokemon({
                     )}
                 </View>
             </View>
-        </View>
+        </Pressable>
     )
 };

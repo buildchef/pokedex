@@ -7,14 +7,28 @@ import { consultarPokemons } from "../api/consultarPokemon";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import MenuOpcoes from "../components/MenuOpcoes";
+import DetalhesPokemon from "../components/DetalhesPokemon";
 
 export default function App() {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
     const [exibirModalOpcoes, setExibirModalOpcoes] = useState<boolean>(false);
+    const [exibirDetalhesPokemon, setExibirDetalhesPokemon] = useState<boolean>(false);
+    const [pokemonParaDetalhar, setPokemonParaDetalhar] = useState<Pokemon>();
     const [fontsLoaded] = useFonts({
         nomePokemonFont: require("../../assets/fonts/nomePokemon.ttf"),
         tiposPokemonFont: require("../../assets/fonts/tiposPokemon.ttf"),
     });
+
+    const RenderizarDetalhesDoPokemon = (pokemon: Pokemon) => {
+        setExibirDetalhesPokemon(true);
+        return (
+            <DetalhesPokemon
+                exibirDetalhesPokemon={exibirDetalhesPokemon}
+                setExibirDetalhesPokemon={setExibirDetalhesPokemon}
+                pokemon={pokemon}
+            />
+        );
+    }
 
     useEffect(() => {
         async function prepare() {
@@ -76,10 +90,16 @@ export default function App() {
                 setExibirModalOpcoes={setExibirModalOpcoes}
             />
 
+            <DetalhesPokemon exibirDetalhesPokemon={exibirDetalhesPokemon} setExibirDetalhesPokemon={setExibirDetalhesPokemon} pokemon={pokemonParaDetalhar}/>
+
             <FlatList
                 data={pokemons}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <PreviaPokemon pokemon={item} />}
+                renderItem={({ item }) => <PreviaPokemon
+                    pokemon={item}
+                    setExibirDetalhesPokemon={setExibirDetalhesPokemon}
+                    setPokemonParaDetalhar={setPokemonParaDetalhar}
+                />}
                 contentContainerStyle={{ padding: 50}}
                 showsVerticalScrollIndicator={false}
                 style={{
