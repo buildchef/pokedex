@@ -156,7 +156,8 @@ export default function DetalhesPokemon({
                             style={{
                                 fontFamily: "nomePokemonFont",
                                 fontSize: 18,
-                                textAlign: "center"
+                                textAlign: "center",
+                                marginBottom: 15
                             }}
                         >POKEMON DETAILS</Text>
 
@@ -187,13 +188,6 @@ export default function DetalhesPokemon({
                                         fontSize: 15
                                     }}
                                 >WEIGHT</Text>
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >ABILITIES</Text>
-
                                 <Text
                                     style={{
                                         fontFamily: "tiposPokemon",
@@ -243,24 +237,6 @@ export default function DetalhesPokemon({
                                         fontSize: 15
                                     }}
                                 >{(Number(pokemon?.weight)/10) + " KILOGRAMS"}</Text>
-
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        justifyContent: "flex-start",
-                                        gap: 8
-                                    }}
-                                >
-                                    {pokemon?.abilities.map((ability: Ability, index: number) => (
-                                        <Text
-                                            key={ability.ability.name || index}
-                                            style={{
-                                                fontFamily: "tiposPokemon",
-                                                fontSize: 15
-                                            }}
-                                        >{ability.ability.name.toUpperCase()+","}</Text>
-                                    ))}
-                                </View>
                                 <Text
                                     style={{
                                         fontFamily: "tiposPokemon",
