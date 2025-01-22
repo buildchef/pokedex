@@ -19,17 +19,6 @@ export default function App() {
         tiposPokemonFont: require("../../assets/fonts/tiposPokemon.ttf"),
     });
 
-    const RenderizarDetalhesDoPokemon = (pokemon: Pokemon) => {
-        setExibirDetalhesPokemon(true);
-        return (
-            <DetalhesPokemon
-                exibirDetalhesPokemon={exibirDetalhesPokemon}
-                setExibirDetalhesPokemon={setExibirDetalhesPokemon}
-                pokemon={pokemon}
-            />
-        );
-    }
-
     useEffect(() => {
         async function prepare() {
             await SplashScreen.preventAutoHideAsync();
@@ -49,28 +38,10 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <View
-                style={{
-                    backgroundColor: "#fa3e25",
-                    height: 100,
-                    width: "100%",
-                    marginBottom: -40,
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-            >
-                <Text
-                    style={{
-                        fontSize: 30,
-                        color: "white",
-                        fontFamily: "nomePokemonFont",
-                        textAlign: "center"
-                    }}
-                >POKEDEX</Text>
+            <View style={styles.containerHeader}>
+                <Text style={styles.textoHeader}>POKEDEX</Text>
 
-                <Pressable
-                    onPress={() => setExibirModalOpcoes(true)}
-                >
+                <Pressable onPress={() => setExibirModalOpcoes(true)}>
                     <Image
                         source={{
                             uri: "https://png.pngtree.com/png-vector/20220623/ourmid/pngtree-pokemon-game-symbol-pikachu-play-png-image_5289221.png"
@@ -118,4 +89,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start"
     },
+    containerHeader: {
+        backgroundColor: "#fa3e25",
+        height: 100,
+        width: "100%",
+        marginBottom: -40,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    textoHeader: {
+        fontSize: 30,
+        color: "white",
+        fontFamily: "nomePokemonFont",
+        textAlign: "center"
+    }
 });

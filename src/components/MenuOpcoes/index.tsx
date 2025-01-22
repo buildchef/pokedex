@@ -1,6 +1,7 @@
 import {Modal, Pressable, Text, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {icones} from "../../utils/icones";
+import {styles} from "./style";
 
 export type MenuOpcoesProps = {
     exibirModalOpcoes: boolean;
@@ -15,25 +16,13 @@ export default function MenuOpcoes({
         return (
             <Pressable
                 onPress={acao}
-                style={{
-                    justifyContent: "flex-start",
-                    flexDirection: "row",
-                    gap: 10
-                }}
+                style={styles.containerOpcao}
             >
-                <MaterialIcons name={icone} style={{
-                    fontSize: 30,
-                }}/>
-                <Text
-                    style={{
-                        fontSize: 30,
-                        fontFamily: "tiposPokemonFont",
-                        color: "black",
-                    }}
-                >{texto}</Text>
+                <MaterialIcons name={icone} style={{fontSize: 30}}/>
+                <Text style={styles.textoOpcao}>{texto}</Text>
             </Pressable>
-        )
-    }
+        );
+    };
 
     return (
         <Modal
@@ -42,40 +31,13 @@ export default function MenuOpcoes({
             visible={exibirModalOpcoes}
             onRequestClose={() => setExibirModalOpcoes(false)}
         >
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <View
-                    style={{
-                        backgroundColor: "white",
-                        paddingHorizontal: 25,
-                        paddingBottom: 25,
-                        borderRadius: 20,
-                        borderWidth: 3,
-                        borderColor: "black",
-                        width: 280,
-                        gap: 20
-                    }}
-                >
+            <View style={styles.fundoModalOpcoes}>
+                <View style={styles.containerModalOpcoes}>
                     <Pressable
-                        style={{
-                            borderRadius: 50,
-                            borderWidth: 2,
-                            borderColor: "black",
-                            backgroundColor: "red",
-                            marginTop: -20,
-                            marginBottom: -10,
-                            marginLeft: -45,
-                            width: 45,
-                        }}
+                        style={styles.fundoBotaoFechar}
                         onPress={() => setExibirModalOpcoes(false)}
                     >
-                        <MaterialIcons name={icones.Close} style={{
+                        <MaterialIcons name={"close"} style={{
                             color: "white",
                             fontSize: 40,
                         }}/>

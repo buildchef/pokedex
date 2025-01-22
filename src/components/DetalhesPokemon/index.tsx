@@ -1,9 +1,9 @@
 import {Image, Modal, Pressable, Text, View} from "react-native";
-import {Ability, Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
+import {Pokemon, PokemonType} from "../../utils/types/RetornoDetalhadoPokemon";
 import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 import {formatarNomePokemon} from "../../utils/formatadores";
 import {MaterialIcons} from "@expo/vector-icons";
-import {icones} from "../../utils/icones";
+import {styles} from "./style";
 
 export type DetalhesPokemonProps = {
     exibirDetalhesPokemon: boolean;
@@ -16,55 +16,25 @@ export default function DetalhesPokemon({
     setExibirDetalhesPokemon,
     pokemon
 }: DetalhesPokemonProps) {
-    return(
+    return pokemon?.sprites?.front_default && (
         <Modal
-        animationType="fade"
-        transparent={true}
-        visible={exibirDetalhesPokemon}
-        onRequestClose={() => setExibirDetalhesPokemon(false)}
+            animationType="fade"
+            transparent={true}
+            visible={exibirDetalhesPokemon}
+            onRequestClose={() => setExibirDetalhesPokemon(false)}
         >
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <View
-                    style={{
-                        backgroundColor: "white",
-                        width: 390,
-                        height: 750,
-                        borderRadius: 20
-                    }}
-                >
+            <View style={styles.fundoModal}>
+                <View style={styles.containerModal}>
                     <View
-                        style={{
+                        style={[styles.containerFotoETipoPokemon, {
                             backgroundColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corCard,
-                            height: 370,
-                            paddingHorizontal: 15,
-                            paddingTop: 30,
-                            borderTopLeftRadius: 20,
-                            borderTopRightRadius: 20,
-                            borderTopWidth: 5,
-                            borderLeftWidth: 5,
-                            borderRightWidth: 5,
                             borderColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos,
-                        }}
+                        }]}
                     >
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                marginBottom: 20
-                            }}
-                        >
-                            <Pressable
-                                onPress={() => setExibirDetalhesPokemon(false)}
-                            >
+                        <View style={styles.containerFecharEFavoritar}>
+                            <Pressable onPress={() => setExibirDetalhesPokemon(false)}>
                                 <MaterialIcons
-                                    name={icones.Close}
+                                    name={"close"}
                                     size={35}
                                     color={"white"}
                                 />
@@ -76,31 +46,11 @@ export default function DetalhesPokemon({
                             />
                         </View>
                         <View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between"
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: "nomePokemonFont",
-                                        fontSize: 30,
-                                        color: "white",
-                                    }}
-                                >{formatarNomePokemon(pokemon?.name)}</Text>
+                            <View style={styles.containerNomeESimbolo}>
+                                <Text style={styles.nomePokemon}>{formatarNomePokemon(pokemon?.name)}</Text>
                                 <View
-                                    style={{
-                                        backgroundColor: "white",
-                                        borderRadius: 100,
-                                        width: 48,
-                                        paddingHorizontal: 15,
-                                        paddingVertical: 5,
-                                        alignItems: "center",
-                                        borderWidth: 3,
-                                        borderColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos
-                                    }}
-                                >
+                                    style={[ styles.fundoSimbolo,
+                                        {borderColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos}]}>
                                     <Image
                                         source={{uri: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).simbolo}}
                                         width={33}
@@ -108,162 +58,45 @@ export default function DetalhesPokemon({
                                     />
                                 </View>
                             </View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    gap: 10
-                                }}
-                            >
+                            <View style={styles.containerTipospokemon}>
                                 {pokemon?.types.map((type: PokemonType, index: number) => (
-                                        <Text
-                                            key={type.type.name || index}
-                                            style={{
-                                                fontFamily: "tiposPokemonFont",
-                                                color: "white",
-                                                fontSize: 20,
-                                                textAlign: "center",
-                                                backgroundColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos,
-                                                borderRadius: 15,
-                                                marginVertical: 8,
-                                                paddingHorizontal: 15,
-                                                paddingVertical: 4
-                                            }}
-                                        >{type.type.name.toUpperCase()}</Text>
+                                    <Text
+                                        key={type.type.name || index}
+                                        style={[styles.textoTipoPokemon,
+                                        {backgroundColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos}]}
+                                    >{type.type.name.toUpperCase()}</Text>
                                 ))}
                             </View>
                         </View>
 
-                            <View
-                                style={{
-                                    alignItems: "center"
-                                }}
-                            >
-                                <Image
-                                    source={{uri: pokemon?.sprites?.front_default}}
-                                    width={300}
-                                    height={300}
-                                />
-                            </View>
+                        <View style={{alignItems: "center"}}>
+                            <Image
+                                source={{uri: pokemon?.sprites?.front_default}}
+                                width={300}
+                                height={300}
+                            />
+                        </View>
                     </View>
-                    <View
-                        style={{
-                            marginTop: 90,
-                            paddingHorizontal: 20,
-                            marginBottom: 20
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "nomePokemonFont",
-                                fontSize: 18,
-                                textAlign: "center",
-                                marginBottom: 15
-                            }}
-                        >POKEMON DETAILS</Text>
+                    <View style={styles.containerDetalhesDoPokemon}>
+                        <Text style={styles.textoDetalhesDoPokemon}>POKEMON DETAILS</Text>
 
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                gap: 30
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "column",
-                                    justifyContent: "flex-start",
-                                    gap: 12,
-                                    marginTop: 5
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >HEIGHT</Text>
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >WEIGHT</Text>
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >HP</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >ATTACK</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >DEFENSE</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >SPEED</Text>
+                        <View style={styles.containerDeAlinhamentoDeAtributos}>
+                            <View style={styles.containerDeAtributosEValores}>
+                                <Text style={styles.textoAtributosEValores}>HEIGHT</Text>
+                                <Text style={styles.textoAtributosEValores}>WEIGHT</Text>
+                                <Text style={styles.textoAtributosEValores}>HP</Text>
+                                <Text style={styles.textoAtributosEValores}>ATTACK</Text>
+                                <Text style={styles.textoAtributosEValores}>DEFENSE</Text>
+                                <Text style={styles.textoAtributosEValores}>SPEED</Text>
                             </View>
 
-                            <View
-                                style={{
-                                    flexDirection: "column",
-                                    justifyContent: "flex-start",
-                                    gap: 12,
-                                    marginTop: 5
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{(Number(pokemon?.height)/10) + " METERS"}</Text>
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{(Number(pokemon?.weight)/10) + " KILOGRAMS"}</Text>
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{pokemon?.stats[0].base_stat}</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{pokemon?.stats[1].base_stat}</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{pokemon?.stats[2].base_stat}</Text>
-
-                                <Text
-                                    style={{
-                                        fontFamily: "tiposPokemon",
-                                        fontSize: 15
-                                    }}
-                                >{pokemon?.stats[5].base_stat}</Text>
+                            <View style={styles.containerDeAtributosEValores}>
+                                <Text style={styles.textoAtributosEValores}>{(Number(pokemon?.height)/10) + " METERS"}</Text>
+                                <Text style={styles.textoAtributosEValores}>{(Number(pokemon?.weight)/10) + " KILOGRAMS"}</Text>
+                                <Text style={styles.textoAtributosEValores}>{pokemon?.stats[0].base_stat}</Text>
+                                <Text style={styles.textoAtributosEValores}>{pokemon?.stats[1].base_stat}</Text>
+                                <Text style={styles.textoAtributosEValores}>{pokemon?.stats[2].base_stat}</Text>
+                                <Text style={styles.textoAtributosEValores}>{pokemon?.stats[5].base_stat}</Text>
                             </View>
 
                         </View>
@@ -271,5 +104,5 @@ export default function DetalhesPokemon({
                 </View>
             </View>
         </Modal>
-        );
+    )
 };
