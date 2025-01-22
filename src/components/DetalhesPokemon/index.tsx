@@ -4,6 +4,7 @@ import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 import {formatarNomePokemon} from "../../utils/formatadores";
 import {MaterialIcons} from "@expo/vector-icons";
 import {styles} from "./style";
+import {moderateScale} from "react-native-size-matters";
 
 export type DetalhesPokemonProps = {
     exibirDetalhesPokemon: boolean;
@@ -35,13 +36,13 @@ export default function DetalhesPokemon({
                             <Pressable onPress={() => setExibirDetalhesPokemon(false)}>
                                 <MaterialIcons
                                     name={"close"}
-                                    size={35}
+                                    size={moderateScale(35)}
                                     color={"white"}
                                 />
                             </Pressable>
                             <MaterialIcons
                                 name={"favorite"}
-                                size={35}
+                                size={moderateScale(35)}
                                 color={"white"}
                             />
                         </View>
@@ -53,8 +54,8 @@ export default function DetalhesPokemon({
                                         {borderColor: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).corTipos}]}>
                                     <Image
                                         source={{uri: retornarCorDoCardDePokemonDeAcordoComOTipo(pokemon?.types[0].type.name).simbolo}}
-                                        width={33}
-                                        height={33}
+                                        width={moderateScale(33)}
+                                        height={moderateScale(33)}
                                     />
                                 </View>
                             </View>
@@ -72,8 +73,8 @@ export default function DetalhesPokemon({
                         <View style={{alignItems: "center"}}>
                             <Image
                                 source={{uri: pokemon?.sprites?.front_default}}
-                                width={300}
-                                height={300}
+                                width={moderateScale(300)}
+                                height={moderateScale(300)}
                             />
                         </View>
                     </View>

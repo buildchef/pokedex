@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {moderateScale} from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
     fundoModal: {
@@ -9,24 +10,24 @@ export const styles = StyleSheet.create({
     },
     containerModal: {
         backgroundColor: "white",
-        width: 390,
-        height: 750,
+        width: moderateScale(390),
+        height: moderateScale(750),
         borderRadius: 20
     },
     containerFotoETipoPokemon: {
-        height: 370,
-        paddingHorizontal: 15,
-        paddingTop: 30,
+        height: moderateScale(370),
+        paddingHorizontal: moderateScale(15),
+        paddingTop: moderateScale(30),
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        borderTopWidth: 5,
-        borderLeftWidth: 5,
-        borderRightWidth: 5,
+        borderTopWidth: moderateScale(5),
+        borderLeftWidth: moderateScale(5),
+        borderRightWidth: moderateScale(5),
     },
     containerFecharEFavoritar: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: 20
+        marginBottom: moderateScale(20)
     },
     containerNomeESimbolo: {
         flexDirection: "row",
@@ -34,56 +35,56 @@ export const styles = StyleSheet.create({
     },
     nomePokemon: {
         fontFamily: "nomePokemonFont",
-        fontSize: 30,
+        fontSize: moderateScale(30),
         color: "white",
     },
     fundoSimbolo: {
         backgroundColor: "white",
         borderRadius: 100,
-        width: 48,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
+        width: moderateScale(48),
+        paddingHorizontal: moderateScale(15),
+        paddingVertical: moderateScale(5),
         alignItems: "center",
-        borderWidth: 3,
+        borderWidth: moderateScale(3),
     },
     containerTipospokemon: {
         flexDirection: "row",
-        gap: 10
+        gap: moderateScale(10)
     },
     textoTipoPokemon: {
         borderRadius: 15,
-        marginVertical: 8,
-        paddingHorizontal: 15,
-        paddingVertical: 4,
+        marginVertical: moderateScale(8),
+        paddingHorizontal: moderateScale(15),
+        paddingVertical: moderateScale(4),
         fontFamily: "tiposPokemonFont",
         color: "white",
-        fontSize: 20,
+        fontSize: moderateScale(20),
         textAlign: "center",
     },
     containerDetalhesDoPokemon: {
-        marginTop: 90,
-        paddingHorizontal: 20,
-        marginBottom: 20
+        marginTop: moderateScale(90),
+        paddingHorizontal: moderateScale(20),
+        marginBottom: moderateScale(20)
     },
     textoDetalhesDoPokemon: {
         fontFamily: "nomePokemonFont",
-        fontSize: 18,
+        fontSize: moderateScale(18),
         textAlign: "center",
-        marginBottom: 15
+        marginBottom: moderateScale(15)
     },
     containerDeAlinhamentoDeAtributos: {
         flexDirection: "row",
         justifyContent: "space-between",
-        gap: 30
+        gap: moderateScale(30)
     },
     containerDeAtributosEValores: {
         flexDirection: "column",
         justifyContent: "flex-start",
-        gap: 12,
-        marginTop: 5
+        gap: moderateScale(12),
+        marginTop: moderateScale(5)
     },
     textoAtributosEValores: {
         fontFamily: "tiposPokemon",
-        fontSize: 15
+        fontSize: moderateScale(15)
     },
 });

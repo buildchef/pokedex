@@ -8,6 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import MenuOpcoes from "../components/MenuOpcoes";
 import DetalhesPokemon from "../components/DetalhesPokemon";
+import {moderateScale} from "react-native-size-matters";
 
 export default function App() {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -46,10 +47,10 @@ export default function App() {
                         source={{
                             uri: "https://png.pngtree.com/png-vector/20220623/ourmid/pngtree-pokemon-game-symbol-pikachu-play-png-image_5289221.png"
                         }}
-                        width={50}
-                        height={50}
+                        width={moderateScale(50)}
+                        height={moderateScale(50)}
                         style={{
-                            marginBottom: -60
+                            marginBottom: moderateScale(-60)
                         }}
                     />
                 </Pressable>
@@ -71,10 +72,10 @@ export default function App() {
                     setExibirDetalhesPokemon={setExibirDetalhesPokemon}
                     setPokemonParaDetalhar={setPokemonParaDetalhar}
                 />}
-                contentContainerStyle={{ padding: 50}}
+                contentContainerStyle={{ padding: moderateScale(50)}}
                 showsVerticalScrollIndicator={false}
                 style={{
-                    marginTop: 50
+                    marginTop: moderateScale(50)
                 }}
             />
             <StatusBar style="auto" />
@@ -91,14 +92,14 @@ const styles = StyleSheet.create({
     },
     containerHeader: {
         backgroundColor: "#fa3e25",
-        height: 100,
+        height: moderateScale(100),
         width: "100%",
-        marginBottom: -40,
+        marginBottom: moderateScale(-40),
         alignItems: "center",
         justifyContent: "center"
     },
     textoHeader: {
-        fontSize: 30,
+        fontSize: moderateScale(30),
         color: "white",
         fontFamily: "nomePokemonFont",
         textAlign: "center"

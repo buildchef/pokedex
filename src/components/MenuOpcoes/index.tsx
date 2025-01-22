@@ -2,6 +2,7 @@ import {Modal, Pressable, Text, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {icones} from "../../utils/icones";
 import {styles} from "./style";
+import {moderateScale} from "react-native-size-matters";
 
 export type MenuOpcoesProps = {
     exibirModalOpcoes: boolean;
@@ -18,7 +19,7 @@ export default function MenuOpcoes({
                 onPress={acao}
                 style={styles.containerOpcao}
             >
-                <MaterialIcons name={icone} style={{fontSize: 30}}/>
+                <MaterialIcons name={icone} style={{fontSize: moderateScale(30)}}/>
                 <Text style={styles.textoOpcao}>{texto}</Text>
             </Pressable>
         );
@@ -39,13 +40,13 @@ export default function MenuOpcoes({
                     >
                         <MaterialIcons name={"close"} style={{
                             color: "white",
-                            fontSize: 40,
+                            fontSize: moderateScale(40),
                         }}/>
                     </Pressable>
 
-                    {renderizarOpcao("SETTINGS", icones.Settings, () => console.log("oi"))}
-                    {renderizarOpcao("ABOUT", icones.Info, () => console.log("oi"))}
-                    {renderizarOpcao("FEEDBACK", icones.Mail, () => console.log("oi"))}
+                    {renderizarOpcao("SETTINGS", icones.Settings, () => console.log("settings"))}
+                    {renderizarOpcao("ABOUT", icones.Info, () => console.log("about"))}
+                    {renderizarOpcao("FEEDBACK", icones.Mail, () => console.log("feedback"))}
 
                 </View>
             </View>

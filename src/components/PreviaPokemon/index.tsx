@@ -3,6 +3,7 @@ import {Image, Pressable, Text, View} from "react-native";
 import {formatarNomePokemon} from "../../utils/formatadores";
 import {retornarCorDoCardDePokemonDeAcordoComOTipo} from "../../utils/cores";
 import {styles} from "./style";
+import {moderateScale} from "react-native-size-matters";
 
 type PreviaPokemonProps = {
     setExibirDetalhesPokemon: (valor: boolean) => void;
@@ -42,8 +43,8 @@ export default function PreviaPokemon({
                 </View>
                 <Image
                     source={{ uri: pokemon.sprites.front_default }}
-                    width={200}
-                    height={200}
+                    width={moderateScale(200)}
+                    height={moderateScale(200)}
                     style={styles.imagemPreviaPokemon}
                 />
             </View>

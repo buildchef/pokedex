@@ -1,13 +1,14 @@
 import {StyleSheet} from "react-native";
+import {moderateScale} from "react-native-size-matters";
 
 export const styles = StyleSheet.create({
     containerOpcao: {
         justifyContent: "flex-start",
         flexDirection: "row",
-        gap: 10
+        gap: moderateScale(10)
     },
     textoOpcao: {
-        fontSize: 30,
+        fontSize: moderateScale(30),
         fontFamily: "tiposPokemonFont",
         color: "black",
     },
@@ -19,22 +20,22 @@ export const styles = StyleSheet.create({
     },
     containerModalOpcoes: {
         backgroundColor: "white",
-        paddingHorizontal: 25,
-        paddingBottom: 25,
+        paddingHorizontal: moderateScale(25),
+        paddingBottom: moderateScale(25),
         borderRadius: 20,
-        borderWidth: 3,
+        borderWidth: moderateScale(3),
         borderColor: "black",
-        width: 280,
-        gap: 20
+        width: moderateScale(280),
+        gap: moderateScale(20)
     },
     fundoBotaoFechar: {
         borderRadius: 50,
-        borderWidth: 2,
+        borderWidth: moderateScale(2),
         borderColor: "black",
         backgroundColor: "red",
-        marginTop: -20,
-        marginBottom: -10,
-        marginLeft: -45,
-        width: 45,
+        marginTop: moderateScale(-20),
+        marginBottom: moderateScale(-10),
+        marginLeft: moderateScale(-45),
+        width: moderateScale(45),
     }
 });
